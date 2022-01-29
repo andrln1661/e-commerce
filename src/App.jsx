@@ -45,7 +45,9 @@ function App(props) {
       <Routes>
         <Route path="*" element={<h1>Nothing Matching Found</h1>} />
         <Route exact path="/" element={<Homepage />} />
-        <Route path="/shop" element={<Shoppage />} />
+        <Route path="/shop" element={<Shoppage />}>
+          
+        </Route>
         <Route
           path="/sign"
           element={props.currentUser ? <Navigate to="/" /> : <Signpage />}

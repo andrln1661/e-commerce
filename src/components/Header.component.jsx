@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./Header.styles.scss";
 
-import { ReactComponent as Logo } from "../assets/crown.svg";
+import Logo from "../assets/crown.svg?component";
 import CartIcon from "./cart-icon.component";
 import CartDropdown from "./cart-dropdown.component";
 
