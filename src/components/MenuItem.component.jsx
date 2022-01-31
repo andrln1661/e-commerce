@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 function MenuItem({ title, imageUrl, size, linkUrl }) {
   return (
-    <Link to={linkUrl} className={`${size} menu-item`}>
+    <Link to={`shop/${linkUrl}`} className={`${size} menu-item`}>
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
       />
       <div className="content">
         <h1 className="title">{title.toUpperCase()}</h1>
-        <p className="subtitle">Shop Then</p>
+        <p className="subtitle">Shop Now</p>
       </div>
     </Link>
   );

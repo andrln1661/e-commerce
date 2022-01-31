@@ -9,14 +9,11 @@ import { selectCartItemsCount } from "../redux/cart/cart.selectors";
 
 import ShoppingIcon from "../assets/shopping-bag.svg?component";
 
-function CartIcon(props) {
-  const { toggleCartHidden } = props;
+function CartIcon({ toggleCartHidden, itemCount }) {
   return (
     <div className="cart-icon" onClick={toggleCartHidden}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">
-        {props.itemCount > 99 ? "99+" : props.itemCount}
-      </span>
+      <span className="item-count">{itemCount > 99 ? "99+" : itemCount}</span>
     </div>
   );
 }
