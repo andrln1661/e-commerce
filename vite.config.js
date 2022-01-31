@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: "/e-commerce/",
+  base: "/",
   build: {
     chunkSizeWarningLimit: 1600,
   },
