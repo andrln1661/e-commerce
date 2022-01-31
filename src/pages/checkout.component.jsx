@@ -21,7 +21,7 @@ function CheckoutPage({ total, cartItems }) {
         </div>
 
         <div className="header-block">
-          <span>Quantity</span>
+          <span>Quantityy</span>
         </div>
 
         <div className="header-block">
