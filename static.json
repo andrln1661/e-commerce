@@ -1,6 +1,5 @@
 {
   "root": "./dist",
   "clean_urls": true,
-  "canonical_host": "https://murmuring-gorge-45011.herokuapp.com/",
   "routes": { "/assets/*": "/assets/", "/**": "index.html" }
 }
