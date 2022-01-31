@@ -24,7 +24,6 @@ const cartReducer = (state = INITIAL_STATE, { type, payload }) => {
       };
 
     case cartActionTypes.CLEAR_ITEM_FROM_CART:
-      console.log(payload);
       return {
         ...state,
         cartItems: state.cartItems.filter(

@@ -1,5 +1,5 @@
 {
   "root": "./dist",
   "clean_urls": true,
-  "routes": { "/assets/*": "/assets/", "/**": "index.html" }
+  "routes": { "/**": "index.html" }
 }
