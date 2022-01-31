@@ -12,14 +12,18 @@ import Signpage from "./pages/Signpage.component";
 
 import CheckoutPage from "./pages/checkout.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocuments,
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-function App(props) {
+function App({ setCurrentUser, currentUser, collectionsArray }) {
   let unsubscribeFormAuth = null;
   useEffect(() => {
-    const setCurrentUser = props.setCurrentUser;
     unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -33,6 +37,11 @@ function App(props) {
       } else {
         setCurrentUser(userAuth);
       }
+
+      addCollectionAndDocuments(
+        "collections",
+        collectionsArray.map(({ title, items }) => ({ title, items }))
+      );
     });
 
     return () => {
@@ -52,7 +61,7 @@ function App(props) {
         <Route path="shop/*" element={<Shoppage />} />
         <Route
           path="sign"
-          element={props.currentUser ? <Navigate to="/" /> : <Signpage />}
+          element={currentUser ? <Navigate to="/" /> : <Signpage />}
         />
         <Route path="checkout" element={<CheckoutPage />} />
       </Routes>
@@ -62,6 +71,7 @@ function App(props) {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
