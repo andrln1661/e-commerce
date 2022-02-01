@@ -46,12 +46,29 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+export const convertCollectionsSanpshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((returnObj, collection) => {
+    returnObj[collection.title.toLowerCase()] = collection;
+    return returnObj;
+  }, {});
+};
+
 export const addCollectionAndDocuments = async (
   collecionKey,
   documentsToAdd
 ) => {
   const collectionRef = firestore.collection(collecionKey);
-  console.log(collectionRef);
 
   const batch = firestore.batch();
   documentsToAdd.forEach((obj) => {

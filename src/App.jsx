@@ -12,37 +12,33 @@ import Signpage from "./pages/Signpage.component";
 
 import CheckoutPage from "./pages/checkout.component";
 
-import {
-  auth,
-  createUserProfileDocument,
-  addCollectionAndDocuments,
-} from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
-function App({ setCurrentUser, currentUser, collectionsArray }) {
+function App({ setCurrentUser, currentUser }) {
   let unsubscribeFormAuth = null;
   useEffect(() => {
-    unsubscribeFormAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    unsubscribeFormAuth = auth.onAuthStateChanged(
+      async (userAuth) => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
 
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
+          userRef.onSnapshot((snapShot) => {
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            });
           });
-        });
-      } else {
-        setCurrentUser(userAuth);
+        } else {
+          setCurrentUser(userAuth);
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-
-      addCollectionAndDocuments(
-        "collections",
-        collectionsArray.map(({ title, items }) => ({ title, items }))
-      );
-    });
+    );
 
     return () => {
       unsubscribeFormAuth();
