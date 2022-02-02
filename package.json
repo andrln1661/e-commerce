@@ -54,6 +54,7 @@
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
     "@vitejs/plugin-react": "^1.1.4",
     "vite": "^2.7.2",
+    "vite-plugin-favicon": "^1.0.8",
     "vite-plugin-svgr": "^1.0.1",
     "web-vitals": "^2.1.2"
   },
