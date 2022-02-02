@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 
 import "./sign-up.styles.scss";
 
@@ -7,12 +6,14 @@ import { signUpStart } from "../redux/user/user.actions";
 
 import FormInput from "./form-input.component";
 import CustomButton from "./custom-button.component";
+import { useDispatch } from "react-redux";
 
-function SignUp({ signUpStart }) {
+function SignUp() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  let dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +23,7 @@ function SignUp({ signUpStart }) {
       return;
     }
 
-    signUpStart({ email, password, displayName });
+    dispatch(signUpStart({ email, password, displayName }));
 
     setDisplayName("");
     setEmail("");
@@ -36,14 +37,14 @@ function SignUp({ signUpStart }) {
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
-          type="text"
+          type="search"
           name="displayName"
           value={displayName}
           onChange={(event) => setDisplayName(event.target.value)}
           label="Display Name"
         />
         <FormInput
-          type="text"
+          type="email"
           name="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -69,8 +70,4 @@ function SignUp({ signUpStart }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
-});
-
-export default connect(null, mapDispatchToProps)(SignUp);
+export default SignUp;

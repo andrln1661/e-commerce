@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Route, Routes } from "react-router-dom";
-import { connect } from "react-redux";
 
 import { fetchCollectionsStart } from "../redux/shop/shop.actions";
 
@@ -8,28 +7,22 @@ import CollectionsOverviewContainer from "../components/collections-overview.con
 import CollectionContainer from "../components/collection.container";
 
 import "./Shoppage.styles.scss";
+import { useDispatch } from "react-redux";
 
-function Shoppage({ fetchCollectionsStartAsync }) {
-  let params = useParams();
+function Shoppage() {
+  let dispatch = useDispatch();
   useEffect(() => {
-    fetchCollectionsStart();
-  }, []);
+    dispatch(fetchCollectionsStart());
+  }, [dispatch]);
 
   return (
     <div className="shoppage">
       <Routes>
         <Route path="" element={<CollectionsOverviewContainer />} />
-        <Route
-          path=":collectionId"
-          element={<CollectionContainer params={params} />}
-        />
+        <Route path=":collectionId" element={<CollectionContainer />} />
       </Routes>
     </div>
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStart: dispatch(fetchCollectionsStart()),
-});
-
-export default connect(null, mapDispatchToProps)(Shoppage);
+export default Shoppage;
