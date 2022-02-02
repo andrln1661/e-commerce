@@ -9,40 +9,14 @@ import Homepage from "./pages/Homepage.component";
 import Shoppage from "./pages/Shoppage.component";
 import Header from "./components/Header.component";
 import Signpage from "./pages/Signpage.component";
-
 import CheckoutPage from "./pages/checkout.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import { setCurrentUser } from "./redux/user/user.actions";
-import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import { checkUserSession } from "./redux/user/user.actions";
 
-function App({ setCurrentUser, currentUser }) {
-  let unsubscribeFormAuth = null;
+function App({ currentUser, checkUserSession }) {
   useEffect(() => {
-    unsubscribeFormAuth = auth.onAuthStateChanged(
-      async (userAuth) => {
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
-
-          userRef.onSnapshot((snapShot) => {
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            });
-          });
-        } else {
-          setCurrentUser(userAuth);
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    return () => {
-      unsubscribeFormAuth();
-    };
+    checkUserSession();
   }, []);
 
   return (
@@ -67,11 +41,10 @@ function App({ setCurrentUser, currentUser }) {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
