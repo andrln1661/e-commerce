@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, useParams } from "react-router-dom";
 import { connect, useSelector, useDispatch } from "react-redux";
-import { createStructuredSelector } from "reselect";
 
 import "./App.css";
 
@@ -10,7 +9,6 @@ import Shoppage from "./pages/Shoppage.component";
 import Header from "./components/Header.component";
 import Signpage from "./pages/Signpage.component";
 import CheckoutPage from "./pages/checkout.component";
-
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 
@@ -23,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="App">
       <Header />
       <Routes>
         <Route
