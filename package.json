@@ -24,7 +24,28 @@
     "stripe": "^6.28.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "concurrently": "^4.0.1",
     "nodemon": "^1.19.1"
+=======
+    "@honkhonk/vite-plugin-svgr": "^1.1.0",
+    "@vitejs/plugin-react": "^1.1.4",
+    "vite": "^2.7.2",
+    "vite-plugin-favicon": "^1.0.8",
+    "vite-plugin-svgr": "^1.0.1",
+    "web-vitals": "^2.1.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+>>>>>>> 8bdb920f684a97445e5dab8b30c04ae9a95a448c
   }
 }
