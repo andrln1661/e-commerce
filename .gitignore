@@ -4,7 +4,8 @@
 /node_modules
 /client/node_modules
 /client/dist
-package-lock.json
+/client/package-lock.json
+/client/yarn.lock
 /.pnp
 .env
 .pnp.js
