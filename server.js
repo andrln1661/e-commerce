@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(serveStatic(path.join(__dirname, "/client/dist")));
   app.get("*", (req, res) => {
     res.send(path.join(__dirname, "/client/dist", "index.html"));
-  });
+  }); 
 }
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
