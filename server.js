@@ -24,13 +24,14 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.post("/payment", async (req, res) => {
   const { amount, previousIntent } = req.body;
-  console.log("Request with totalPrice of $" + amount / 100);
 
-  if (previousIntent) {
-    try {
-      await stripe.paymentIntents.cancel(previousIntent);
-    } catch (error) {}
-  }
+  try {
+    if (previousIntent !== null) {
+      await stripe.paymentIntents
+        .cancel(previousIntent)
+        .then((res) => console.log("Intent " + previousIntent + " Cancelled"));
+    }
+  } catch (error) {}
 
   if (amount === 0) {
     res.send({
@@ -38,6 +39,8 @@ app.post("/payment", async (req, res) => {
     });
     return;
   }
+
+  console.log("Request with totalPrice of $" + amount / 100);
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount,

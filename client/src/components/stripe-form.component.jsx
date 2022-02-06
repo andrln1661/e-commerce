@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 import SelectCountry from "./select-country.component";
+import CustomButton from "./custom-button.component";
 
 import "./stripe-form.component.scss";
 
@@ -76,6 +77,7 @@ function CheckoutForm({ price }) {
     }
 
     setIsCheckoutLoading(false);
+    
   };
 
   return (
@@ -98,7 +100,10 @@ function CheckoutForm({ price }) {
       </div>
       <hr />
       <PaymentElement id="payment-element" />
-      <button disabled={isCheckoutLoading || !stripe || !elements} id="submit">
+      <CustomButton
+        disabled={isCheckoutLoading || !stripe || !elements}
+        id="submit"
+      >
         <span id="button-text">
           {isCheckoutLoading ? (
             <div className="spinner" id="spinner"></div>
@@ -106,7 +111,7 @@ function CheckoutForm({ price }) {
             "Pay now"
           )}
         </span>
-      </button>
+      </CustomButton>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>

@@ -33,7 +33,7 @@ function StripeCheckout({ price }) {
       axios.post("http://localhost:5000/payment", {
         amount: 0,
         previousIntent: intent,
-      })
+      });
     };
   }, [price]);
 

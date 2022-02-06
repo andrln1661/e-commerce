@@ -14,7 +14,6 @@ import { signOutStart } from "../redux/user/user.actions";
 
 function Header() {
   let currentUser = useSelector(selectCurrentUser);
-  let hidden = useSelector(selectCartHidden);
   let dispatch = useDispatch();
 
   return (
@@ -40,7 +39,7 @@ function Header() {
         )}
         <CartIcon />
       </div>
-      {hidden ? null : <CartDropdown />}
+      <CartDropdown />
     </div>
   );
 }

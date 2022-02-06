@@ -5,6 +5,10 @@ import { cartActionTypes } from "./cart.types";
 
 import { clearCart } from "./cart.actions";
 
+export function* onPaymentSuccess() {
+  
+}
+
 export function* clearCartOnSignOut() {
   yield put(clearCart());
 }

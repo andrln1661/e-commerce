@@ -48,9 +48,13 @@ function CheckoutPage() {
       <div className="test-warning">
         *Please use the following test credit card for payment*
         <br />
-        4242 4242 4242 4242 - Exp: 01/23 - CVV: 123
+        4242 4242 4242 4242 - Exp: 01/23 - CVC: 123
         <hr />
         DON'T EVEN TRY TO PROVIDE REAL CARD CREDENTIALS
+        <hr />
+        Shipping info expires right after you press "Pay Now" button
+        <br />
+        So provide there whatever you want
       </div>
     </div>
   );
