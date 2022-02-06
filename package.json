@@ -24,6 +24,7 @@
     "stripe": "^6.28.0"
   },
   "devDependencies": {
+    "@honkhonk/vite-plugin-svgr": "^1.1.0",
     "@vitejs/plugin-react": "^1.1.4",
     "vite": "^2.7.2",
     "vite-plugin-favicon": "^1.0.8",
