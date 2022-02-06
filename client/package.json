@@ -47,9 +47,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npx vite build",
-    "preview": "vite preview",
-    "postinstall": "npm run build"
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@honkhonk/vite-plugin-svgr": "^1.1.0",
