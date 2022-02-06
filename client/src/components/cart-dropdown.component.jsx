@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./cart-dropdown.styles.scss";
 
-import { selectCartItems } from "../redux/cart/cart.selectors";
+import { selectCartItems, selectCartTotal } from "../redux/cart/cart.selectors";
 
 import CustomButton from "./custom-button.component";
 import CartItem from "./cart-item.component";
@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 function CartDropdown() {
   let cartItems = useSelector(selectCartItems);
+  let total = useSelector(selectCartTotal);
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -34,6 +35,7 @@ function CartDropdown() {
           navigate(`/checkout`);
           dispatch(toggleCartHidden());
         }}
+        disabled={total ? false : true}
       >
         GO TO CHECKOUT
       </CustomButton>

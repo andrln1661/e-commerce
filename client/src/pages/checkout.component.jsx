@@ -24,7 +24,7 @@ function CheckoutPage() {
           </div>
 
           <div className="header-block">
-            <span>Quantityy</span>
+            <span>Quantity</span>
           </div>
 
           <div className="header-block">
@@ -42,18 +42,15 @@ function CheckoutPage() {
       </div>
 
       <div className="payment">
-        <div className="test-warning">
-          *Please use the following test credit card for payment*
-          <br />
-          4242 4242 4242 4242 - Exp: 01/23 - CVV: 123
-          <hr />
-          DON'T EVEN TRY TO PROVIDE REAL CARD CREDENTIALS
-        </div>
-
-        <div className="total">
-          <span>TOTAL: ${total}</span>
-        </div>
         <StripeCheckout price={total} />
+      </div>
+
+      <div className="test-warning">
+        *Please use the following test credit card for payment*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/23 - CVV: 123
+        <hr />
+        DON'T EVEN TRY TO PROVIDE REAL CARD CREDENTIALS
       </div>
     </div>
   );

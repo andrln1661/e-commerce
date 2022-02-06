@@ -16,19 +16,32 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === "production") {
   app.use(serveStatic(path.join(__dirname, "/client/dist")));
   app.get("*", (req, res) => {
-    res.send(path.join(__dirname, "/client/dist", "index.html"));
-  }); 
+    res.sendFile(path.join(__dirname, "/client/dist", "index.html"));
+  });
 }
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.post("/payment", async (req, res) => {
-  const { amount } = req.body;
+  const { amount, previousIntent } = req.body;
+  console.log("Request with totalPrice of $" + amount / 100);
+
+  if (previousIntent) {
+    try {
+      await stripe.paymentIntents.cancel(previousIntent);
+    } catch (error) {}
+  }
+
+  if (amount === 0) {
+    res.send({
+      clientSecret: null,
+    });
+    return;
+  }
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount,
     currency: "usd",
-
     automatic_payment_methods: {
       enabled: true,
     },
@@ -36,6 +49,7 @@ app.post("/payment", async (req, res) => {
 
   res.send({
     clientSecret: paymentIntent.client_secret,
+    intent: paymentIntent.id,
   });
 });
 

@@ -1,0 +1,85 @@
+#payment-form {
+  display: flex;
+  flex-direction: column;
+
+  hr {
+    margin: 20px 0;
+  }
+
+  .total{
+    margin: auto;
+    padding-bottom: 20px;
+    font-size: 30px;
+  }
+
+  .shipping-form {
+    display: flex;
+    flex-direction: column;
+
+    #email {
+      border-radius: 11px;
+      margin-bottom: 10px;
+    }
+
+    #email:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px hsla(211, 100%, 50%, 25%),
+        0 0 0 1px hsla(211, 100%, 50%, 50%);
+    }
+
+    label {
+      font-size: 0.95em;
+      color: #262626;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select {
+      background-color: #f6f8fa;
+      border: none;
+      padding: 12px;
+      font-weight: 500;
+      font-size: 16px;
+      outline: none;
+      transition: background 0.2s ease, border 0.2s ease, box-shadow 0.2s ease,
+        color 0.2s ease;
+    }
+
+    input:first-child {
+      border-top-left-radius: 11px;
+      border-top-right-radius: 11px;
+    }
+
+    select {
+      color: #94959b;
+    }
+
+    ::-webkit-input-placeholder {
+      color: #94959b;
+    }
+
+    .shipping-inputs {
+      display: flex;
+      flex-direction: column;
+
+      .city-zip {
+        display: flex;
+        flex-direction: row;
+
+        input {
+          width: 50%;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+
+        input:first-child {
+          border-bottom-left-radius: 11px;
+        }
+
+        input:last-child {
+          border-bottom-right-radius: 11px;
+        }
+      }
+    }
+  }
+}

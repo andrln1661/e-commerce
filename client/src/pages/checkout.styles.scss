@@ -3,13 +3,14 @@
   min-height: 90vh;
   display: flex;
   align-items: flex-start;
-  margin-bottom: 100px;
 
   .checkout {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 50px auto 0;
+    margin: 0px auto 0;
+    min-width: 40vw;
+    margin-bottom: 100px;
 
     .checkout-header {
       width: 100%;
@@ -18,6 +19,7 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid darkgrey;
+      border-top: 1px solid darkgrey;
 
       .header-block {
         text-transform: capitalize;
@@ -35,25 +37,48 @@
     }
   }
 
+  .stripe-checkout {
+    .payment-loading {
+      font-size: 50px;
+      background: linear-gradient(
+        to right,
+        #fff 20%,
+        #5469d4 40%,
+        #5469d4 60%,
+        #fff 80%
+      );
+      background-size: 200% auto;
+      color: #000;
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      animation: shine 1s linear infinite;
+      @keyframes shine {
+        to {
+          background-position: 200% center;
+        }
+      }
+    }
+  }
+
   .payment {
     display: flex;
     flex-direction: column;
-    position: -webkit-sticky;
     position: sticky;
-    top: calc(50%);
-    transform: translateY(-50%);
+    top: 120px;
+  }
 
-    .test-warning {
-      text-align: center;
-      margin: 40px 0;
-      font-size: 20px;
-      color: red;
-    }
-
-    .total {
-      margin: auto;
-      font-size: 36px;
-      margin-bottom: 50px;
-    }
+  .test-warning {
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    margin: 40px 0;
+    font-size: 20px;
+    color: red;
+    font-weight: 900;
   }
 }

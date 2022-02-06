@@ -11,10 +11,12 @@ import Signpage from "./pages/Signpage.component";
 import CheckoutPage from "./pages/checkout.component";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
+import { selectCartTotal } from "./redux/cart/cart.selectors";
 
 function App() {
   const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
+  const cartTotal = useSelector(selectCartTotal);
 
   useEffect(() => {
     dispatch(checkUserSession());
@@ -34,7 +36,10 @@ function App() {
           path="sign"
           element={currentUser ? <Navigate to="/" /> : <Signpage />}
         />
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route
+          path="checkout"
+          element={cartTotal ? <CheckoutPage /> : <Navigate to="/" />}
+        />
       </Routes>
     </div>
   );

@@ -5,12 +5,16 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-function CheckoutForm() {
+import SelectCountry from "./select-country.component";
+
+import "./stripe-form.component.scss";
+
+function CheckoutForm({ price }) {
   const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
 
   useEffect(() => {
     if (!stripe) return;
@@ -50,7 +54,7 @@ function CheckoutForm() {
       return;
     }
 
-    setIsLoading(true);
+    setIsCheckoutLoading(true);
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -71,15 +75,36 @@ function CheckoutForm() {
       setMessage("An unexpected error occured.");
     }
 
-    setIsLoading(false);
+    setIsCheckoutLoading(false);
   };
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <div className="total">Total: {price}$</div>
+      <div className="shipping-form">
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" placeholder="example@gmail.com" />
+        <label htmlFor="name">Shipping Address</label>
+        <div className="shipping-inputs">
+          <input type="text" placeholder="Name" id="name" />
+          <SelectCountry />
+          <input type="text" placeholder="Address Line 1" name="address-2" />
+          <input type="text" placeholder="Address Line 2" name="address-1" />
+          <div className="city-zip">
+            <input type="text" placeholder="City" name="city" />
+            <input type="text" placeholder="ZIP" name="zip" />
+          </div>
+        </div>
+      </div>
+      <hr />
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button disabled={isCheckoutLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isCheckoutLoading ? (
+            <div className="spinner" id="spinner"></div>
+          ) : (
+            "Pay now"
+          )}
         </span>
       </button>
       {/* Show any error or success messages */}
