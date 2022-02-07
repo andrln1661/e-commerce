@@ -45,7 +45,7 @@ function CheckoutPage() {
         <StripeCheckout price={total} />
       </div>
 
-      <div className="test-warning">
+      {/* <div className="test-warning">
         *Please use the following test credit card for payment*
         <br />
         4242 4242 4242 4242 - Exp: 01/23 - CVC: 123
@@ -55,7 +55,7 @@ function CheckoutPage() {
         Shipping info expires right after you press "Pay Now" button
         <br />
         So provide there whatever you want
-      </div>
+      </div> */}
     </div>
   );
 }

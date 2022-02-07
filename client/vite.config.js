@@ -9,6 +9,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 1600,
   },
   server: {
-    origin: "http://localhost:5000",
+    origin: "http://localhost:5000/",
   },
 });
